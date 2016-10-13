@@ -2,7 +2,6 @@
 
 namespace Luxury\Auth;
 
-use App\Models\User;
 use Luxury\Support\Arr;
 use Phalcon\Di\Injectable as Injector;
 
@@ -62,6 +61,10 @@ class AuthManager extends Injector
         }
 
         $id = $this->retrieveId();
+
+        if (is_null($id)) {
+            return null;
+        }
 
         $this->user = $this->retrieveUserById($id);
 
