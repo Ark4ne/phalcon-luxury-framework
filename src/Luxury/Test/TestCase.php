@@ -80,7 +80,7 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
         global $config;
 
         if (self::$appGlobal == null) {
-            $this->lxApp = new \Luxury\Foundation\Application(new PhConfig($config));
+            self::$lxAppGlobal = new \Luxury\Foundation\Application(new PhConfig($config));
             self::$appGlobal   = self::$lxAppGlobal->make($this->kernel());
         }
 
