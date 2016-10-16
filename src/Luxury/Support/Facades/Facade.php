@@ -10,7 +10,7 @@ use RuntimeException;
 /**
  * Class Facade
  *
- * @see     Laravel 5.2 Illuminate\Support\Facades\Facade
+ * @see Laravel 5.2 Illuminate\Support\Facades\Facade
  *
  * @package Luxury\Support\Facades
  */
@@ -58,7 +58,7 @@ abstract class Facade
     /**
      * Initiate a mock expectation on the facade.
      *
-     * @param  mixed
+     * @param mixed ...
      *
      * @return \Mockery\Expectation
      */

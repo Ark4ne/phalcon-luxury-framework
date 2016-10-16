@@ -1,8 +1,8 @@
 <?php
 
-namespace TestCase;
+namespace Test\TestCase;
 
-use Stub\StubKernel;
+use Test\Stub\StubKernel;
 
 /**
  * Class TraitTestCase

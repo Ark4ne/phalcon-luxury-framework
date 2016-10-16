@@ -1,5 +1,5 @@
 <?php
-namespace Support;
+namespace Test\Support;
 
 use Luxury\Support\Obj;
 
@@ -152,4 +152,3 @@ class ObjTest extends \PHPUnit_Framework_TestCase
         );
     }
 }
-

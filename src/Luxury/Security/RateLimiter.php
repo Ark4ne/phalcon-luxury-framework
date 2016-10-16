@@ -11,8 +11,6 @@ use Luxury\Di\Injectable;
  * @see https://github.com/laravel/framework/blob/5.2/src/Illuminate/Cache/RateLimiter.php
  *
  * @package Luxury\Security
- *
- * @property-read \Phalcon\Cache\BackendInterface cache
  */
 class RateLimiter extends Injectable
 {
@@ -34,6 +32,7 @@ class RateLimiter extends Injectable
      */
     public function tooManyAttempts($key, $maxAttempts, $decaySeconds = 1)
     {
+        /** @var \Luxury\Cache\CacheStrategy $cache */
         $cache = $this->getDI()->getShared(Services::CACHE);
 
         if ($cache->exists($key . $this->klock, $decaySeconds)) {
@@ -60,6 +59,7 @@ class RateLimiter extends Injectable
      */
     public function hit($key, $decaySeconds = 1)
     {
+        /** @var \Luxury\Cache\CacheStrategy $cache */
         $cache = $this->getDI()->getShared(Services::CACHE);
 
         if (!$cache->exists($key, $decaySeconds)) {
@@ -84,8 +84,8 @@ class RateLimiter extends Injectable
      */
     public function attempts($key, $decaySeconds = 1)
     {
-        return is_null(
-            $value = $this->getDI()->getShared(Services::CACHE)->get($key, $decaySeconds)) ? 0
+        return is_null($value = $this->getDI()->getShared(Services::CACHE)->get($key, $decaySeconds))
+            ? 0
             : (int)$value;
     }
 

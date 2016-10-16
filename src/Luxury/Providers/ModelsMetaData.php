@@ -3,8 +3,8 @@
 namespace Luxury\Providers;
 
 use Luxury\Constants\Services;
-use Luxury\Interfaces\Providable;
 use Phalcon\DiInterface;
+use Phalcon\Mvc\Model\Metadata\Memory;
 
 /**
  * Class ModelsMetaData
@@ -19,9 +19,11 @@ class ModelsMetaData extends Provider
 
     /**
      * @param \Phalcon\DiInterface $di
+     *
+     * @return Memory
      */
     protected function register(DiInterface $di)
     {
-        return new \Phalcon\Mvc\Model\Metadata\Memory;
+        return new Memory;
     }
 }

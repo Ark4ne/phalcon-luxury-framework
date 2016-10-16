@@ -4,6 +4,7 @@ namespace Luxury\Providers;
 
 use Luxury\Constants\Services;
 use Phalcon\DiInterface;
+use Phalcon\Flash\Session;
 
 /**
  * Class FlashSession
@@ -19,10 +20,10 @@ class FlashSession extends Provider
     /**
      * @param \Phalcon\DiInterface $di
      *
-     * @return mixed
+     * @return \Phalcon\Flash\Session
      */
     protected function register(DiInterface $di)
     {
-        return new \Phalcon\Flash\Session;
+        return new Session;
     }
 }

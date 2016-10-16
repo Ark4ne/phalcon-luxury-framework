@@ -19,12 +19,15 @@ class View extends Provider
 
     /**
      * @param \Phalcon\DiInterface $di
+     *
+     * @return \Phalcon\Mvc\View
      */
     protected function register(DiInterface $di)
     {
+        // TODO Move it to new providers or override registering
         $di->setShared(Services::TAG, \Phalcon\Tag::class);
         $di->setShared(Services::ASSETS, \Phalcon\Assets\Manager::class);
-        //$di->setShared(Services::VIEW, function () {
+        // End todo
 
         $view = new \Phalcon\Mvc\View();
 
@@ -47,6 +50,5 @@ class View extends Provider
         ]);
 
         return $view;
-        // });
     }
 }

@@ -3,6 +3,7 @@
 namespace Luxury\Providers;
 
 use Luxury\Constants\Services;
+use Luxury\Security\SecurityPlugin;
 use Phalcon\DiInterface;
 
 /**
@@ -19,10 +20,10 @@ class Security extends Provider
     /**
      * @param \Phalcon\DiInterface $di
      *
-     * @return \Luxury\Security\SecurityPlugin|mixed
+     * @return \Luxury\Security\SecurityPlugin
      */
     protected function register(DiInterface $di)
     {
-        return new \Luxury\Security\SecurityPlugin;
+        return new SecurityPlugin;
     }
 }

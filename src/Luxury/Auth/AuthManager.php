@@ -38,9 +38,9 @@ class AuthManager extends Injector
     /**
      * Auth constructor.
      *
-     * @param \Luxury\Auth\Authorize $adapter
+     * @param Authorize $adapter
      */
-    public function __construct(\Luxury\Auth\Authorize $adapter = null)
+    public function __construct(Authorize $adapter = null)
     {
         $this->adapter = $adapter;
     }

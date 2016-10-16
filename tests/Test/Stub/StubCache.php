@@ -1,6 +1,6 @@
 <?php
 
-namespace Stub;
+namespace Test\Stub;
 
 use Luxury\Support\Str;
 use Phalcon\Cache\Backend;

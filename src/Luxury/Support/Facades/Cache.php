@@ -5,10 +5,11 @@ namespace Luxury\Support\Facades;
 use Luxury\Constants\Services;
 
 /**
- * Class Cache
+ * Class Cache Facade of Luxury\Cache\Strategy
  *
- * @package     Luxury\Support\Facades
+ * @package Luxury\Support\Facades
  *
+ * @method static \Phalcon\Cache\BackendInterface uses() uses(string $uses = null)
  * @method static mixed start() start(int|string $keyName, int $lifetime = null)
  * @method static void stop() stop(bool $stopBuffer = true)
  * @method static mixed getFrontend() getFrontend()
@@ -32,6 +33,6 @@ class Cache extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return Services::HTTP_CLIENT;
+        return Services::CACHE;
     }
 }

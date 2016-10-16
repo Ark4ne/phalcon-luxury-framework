@@ -35,7 +35,7 @@ abstract class Provider implements Providable
     /**
      * @param \Phalcon\DiInterface $di
      */
-    final public function registering(DiInterface $di)
+    public function registering(DiInterface $di)
     {
         $self = $this;
 

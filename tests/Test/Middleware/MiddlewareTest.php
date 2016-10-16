@@ -1,6 +1,6 @@
 <?php
 
-namespace Middleware;
+namespace Test\Middleware;
 
 use Luxury\Constants\Events;
 use Luxury\Foundation\Middleware\Application as ApplicationMiddleware;
@@ -10,10 +10,10 @@ use Luxury\Middleware\AfterMiddleware;
 use Luxury\Middleware\BeforeMiddleware;
 use Luxury\Middleware\FinishMiddleware;
 use Luxury\Middleware\InitMiddleware;
-use Stub\StubController;
-use TestCase\TestCase;
-use TestCase\TestListenable;
-use TestCase\TestListenize;
+use Test\Stub\StubController;
+use Test\TestCase\TestCase;
+use Test\TestCase\TestListenable;
+use Test\TestCase\TestListenize;
 
 /**
  * Class MiddlewareTest
@@ -30,7 +30,7 @@ class MiddlewareTest extends TestCase
         $this->app->useImplicitView(false);
 
         $this->app->router->addGet('/', [
-            'namespace'  => 'Stub',
+            'namespace'  => 'Test\Stub',
             'controller' => 'Stub',
             'action'     => 'index'
         ]);
@@ -91,7 +91,7 @@ class MiddlewareTest extends TestCase
         $this->app->useImplicitView(false);
 
         $this->app->router->addGet('/', [
-            'namespace'  => 'Stub',
+            'namespace'  => 'Test\Stub',
             'controller' => 'Stub',
             'action'     => 'index'
         ]);
@@ -114,7 +114,7 @@ class MiddlewareTest extends TestCase
         $this->app->useImplicitView(false);
 
         $this->app->router->addGet('/', [
-            'namespace'  => 'Stub',
+            'namespace'  => 'Test\Stub',
             'controller' => 'Stub',
             'action'     => 'index'
         ]);
@@ -144,7 +144,7 @@ class MiddlewareTest extends TestCase
         $this->app->useImplicitView(false);
 
         $this->app->router->addGet('/', [
-            'namespace'  => 'Stub',
+            'namespace'  => 'Test\Stub',
             'controller' => 'Stub',
             'action'     => 'index'
         ]);

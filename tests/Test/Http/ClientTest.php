@@ -1,12 +1,12 @@
 <?php
 
-namespace Http;
+namespace Test\Http;
 
 use Luxury\Http\Client;
 use Phalcon\Http\Client\Response;
 use Phalcon\Http\Request\Method;
 use Phalcon\Http\Response\StatusCode;
-use TestCase\TestCase;
+use Test\TestCase\TestCase;
 
 /**
  * Class ClientTest

@@ -7,7 +7,7 @@ use ArrayAccess;
 /**
  * Class Arr
  *
- * @see     Laravel 5.2 Illuminate\Support\Arr F
+ * @see     Laravel 5.2 Illuminate\Support\Arr
  * @package Luxury\Support
  */
 final class Arr

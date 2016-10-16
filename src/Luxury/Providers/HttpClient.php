@@ -3,6 +3,7 @@
 namespace Luxury\Providers;
 
 use Luxury\Constants\Services;
+use Luxury\Http\Client;
 use Phalcon\DiInterface;
 
 /**
@@ -23,6 +24,6 @@ class HttpClient extends Provider
      */
     protected function register(DiInterface $di)
     {
-        return new \Luxury\Http\Client;
+        return new Client;
     }
 }

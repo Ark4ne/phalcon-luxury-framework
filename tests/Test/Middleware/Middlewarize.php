@@ -1,6 +1,6 @@
 <?php
 
-namespace Middleware;
+namespace Test\Middleware;
 
 use Phalcon\Events\Event;
 

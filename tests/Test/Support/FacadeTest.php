@@ -1,5 +1,5 @@
 <?php
-namespace Support;
+namespace Test\Support;
 
 use Luxury\Support\Facades\Facade;
 use Mockery as m;

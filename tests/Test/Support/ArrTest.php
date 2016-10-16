@@ -1,5 +1,5 @@
 <?php
-namespace Support;
+namespace Test\Support;
 
 use ArrayObject;
 use Luxury\Support\Arr;
@@ -82,7 +82,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase
         });
         $this->assertEquals(200, $value);
         $this->assertEquals(100, Arr::first($array));
-        $this->assertEquals(123, Arr::first([], function(){}, 123));
+        $this->assertEquals(123, Arr::first([], function (){}, 123));
     }
 
     public function testLast()

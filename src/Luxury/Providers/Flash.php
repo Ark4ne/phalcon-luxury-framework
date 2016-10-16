@@ -4,6 +4,7 @@ namespace Luxury\Providers;
 
 use Luxury\Constants\Services;
 use Phalcon\DiInterface;
+use Phalcon\Flash\Direct as FlashDirect;
 
 /**
  * Class Flash
@@ -23,7 +24,7 @@ class Flash extends Provider
      */
     protected function register(DiInterface $di)
     {
-        return new \Phalcon\Flash\Direct([
+        return new FlashDirect([
             'error'   => 'alert alert-danger',
             'success' => 'alert alert-success',
             'notice'  => 'alert alert-info',

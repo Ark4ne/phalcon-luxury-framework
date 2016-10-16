@@ -3,7 +3,6 @@
 namespace Luxury\Providers\Http;
 
 use Luxury\Constants\Services;
-use Luxury\Interfaces\Providable;
 use Luxury\Providers\Provider;
 use Phalcon\DiInterface;
 
@@ -20,29 +19,26 @@ class Dispatcher extends Provider
 
     /**
      * @param \Phalcon\DiInterface $di
+     *
+     * @return \Phalcon\Mvc\Dispatcher
      */
     protected function register(DiInterface $di)
     {
-        /*$di->setShared(
-            Services::DISPATCHER,
-            function () {*/
-                /* @var \Phalcon\Di $this */
-                $dispatcher = new \Phalcon\Mvc\Dispatcher();
+        /* @var \Phalcon\Di $this */
+        $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
-                // Create an events manager
-                $eventsManager = $di->getShared(Services::EVENTS_MANAGER);
+        // Create an events manager
+        $eventsManager = $di->getShared(Services::EVENTS_MANAGER);
 
-                // Listen for events produced in the dispatcher using the Security plugin
-                $eventsManager->attach(
-                    'dispatch:beforeExecuteRoute',
-                    $di->getShared(Services::SECURITY)
-                );
+        // Listen for events produced in the dispatcher using the Security plugin
+        $eventsManager->attach(
+            'dispatch:beforeExecuteRoute',
+            $di->getShared(Services::SECURITY)
+        );
 
-                // Assign the events manager to the dispatcher
-                $dispatcher->setEventsManager($eventsManager);
+        // Assign the events manager to the dispatcher
+        $dispatcher->setEventsManager($eventsManager);
 
-                return $dispatcher;
-            /*}
-        );*/
+        return $dispatcher;
     }
 }

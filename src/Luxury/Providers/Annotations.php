@@ -3,6 +3,7 @@
 namespace Luxury\Providers;
 
 use Luxury\Constants\Services;
+use Phalcon\Annotations\Adapter\Memory as AnnotationsMemory;
 use Phalcon\DiInterface;
 
 /**
@@ -23,6 +24,6 @@ class Annotations extends Provider
      */
     protected function register(DiInterface $di)
     {
-        return new \Phalcon\Annotations\Adapter\Memory;
+        return new AnnotationsMemory;
     }
 }

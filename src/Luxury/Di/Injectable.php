@@ -4,6 +4,7 @@ namespace Luxury\Di;
 
 /**
  * Class Injectable
+ *
  * @package Luxury\Di
  *
  * @property-read \Phalcon\Cache\BackendInterface cache
@@ -11,9 +12,13 @@ namespace Luxury\Di;
  */
 abstract class Injectable extends \Phalcon\Di\Injectable
 {
+    /**
+     * Injectable constructor.
+     *
+     * Apply Di::getDefault() into injectable.
+     */
     public function __construct()
     {
-        // Apply Di::getDefault() into injectable.
         $this->setDI($this->getDI());
     }
 }

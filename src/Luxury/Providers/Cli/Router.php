@@ -19,14 +19,13 @@ class Router extends Provider
 
     /**
      * @param \Phalcon\DiInterface $di
+     *
+     * @return \Phalcon\Cli\Router
      */
     protected function register(DiInterface $di)
     {
-        //Registering the Router
-        //$di->setShared(Services::ROUTER, function () {
-            $router = new \Phalcon\Cli\Router(false);
+        $router = new \Phalcon\Cli\Router(false);
 
-            return $router;
-        //});
+        return $router;
     }
 }

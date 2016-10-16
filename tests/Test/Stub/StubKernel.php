@@ -1,9 +1,8 @@
 <?php
 
-namespace Stub;
+namespace Test\Stub;
 
 use Luxury\Foundation\Application\Http as HttpApplication;
-use Luxury\Http\Filter\ThrottleFilter;
 use Luxury\Providers;
 
 /**
@@ -27,7 +26,7 @@ class StubKernel extends HttpApplication
         Providers\Http\Router::class,
         //ViewProvider::class,
         Providers\Http\Dispatcher::class,
-        StubCacheFileProvider::class,
+        Providers\Cache::class,
         //DatabaseProvider::class,
         /*
          * Service provided by the Phalcon\Di\FactoryDefault

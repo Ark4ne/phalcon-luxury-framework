@@ -1,6 +1,6 @@
 <?php
 
-namespace TestCase;
+namespace Test\TestCase;
 
 /**
  * Interface TestListenable

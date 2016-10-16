@@ -13,7 +13,7 @@ use RuntimeException;
  */
 final class Str
 {
-    use \Luxury\Support\Traits\Macroable;
+    use Traits\Macroable;
 
     /**
      * The cache of snake-cased words.

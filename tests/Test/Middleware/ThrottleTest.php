@@ -1,10 +1,11 @@
 <?php
-namespace Middleware;
+namespace Test\Middleware;
 
 use Luxury\Constants\Services;
 use Phalcon\Http\Response;
 use Phalcon\Http\Response\StatusCode;
-use TestCase\TestCase;
+use Test\TestCase\TestCase;
+use Test\TestCase\UseCaches;
 
 /**
  * Trait ThrottleTest
@@ -13,54 +14,14 @@ use TestCase\TestCase;
  */
 class ThrottleTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        $dir = __DIR__ . '/../.data';
-        if (!is_dir($dir)) {
-            if (!mkdir($dir)) {
-                throw new \RuntimeException("Can't made .data directory.");
-            }
-        }
-        // Clear File Cache
-        $files = glob($dir . '/*'); // get all file names
-        foreach ($files as $file) { // iterate files
-            if (is_file($file)) {
-                clearstatcache(null, $file);
-                clearstatcache(false, $file);
-                clearstatcache(true, $file);
-                unlink($file); // delete file
-            }
-        }
-        clearstatcache();
-        clearstatcache(false);
-        clearstatcache(true);
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        $dir = __DIR__ . '/../.data/';
-
-        foreach (scandir($dir) as $item) {
-            if ($item == '.' || $item == '..') {
-                continue;
-            }
-
-            unlink($dir . $item);
-        }
-
-        rmdir($dir);
-    }
+    use UseCaches;
 
     public function testThrottle()
     {
         $this->app->useImplicitView(false);
 
         $this->app->router->addGet('/', [
-            'namespace'  => 'Stub',
+            'namespace'  => 'Test\Stub',
             'controller' => 'Stubthrottled',
             'action'     => 'index'
         ]);
@@ -103,13 +64,13 @@ class ThrottleTest extends TestCase
         $this->app->useImplicitView(false);
 
         $this->app->router->addGet('/', [
-            'namespace'  => 'Stub',
+            'namespace'  => 'Test\Stub',
             'controller' => 'Stubthrottled',
             'action'     => 'index'
         ]);
 
         $this->app->router->addGet('/throttled', [
-            'namespace'  => 'Stub',
+            'namespace'  => 'Test\Stub',
             'controller' => 'Stubthrottled',
             'action'     => 'throttled'
         ]);

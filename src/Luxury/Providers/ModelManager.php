@@ -3,8 +3,8 @@
 namespace Luxury\Providers;
 
 use Luxury\Constants\Services;
-use Luxury\Interfaces\Providable;
 use Phalcon\DiInterface;
+use Phalcon\Mvc\Model\Manager;
 
 /**
  * Class ModelManager
@@ -19,9 +19,11 @@ class ModelManager extends Provider
 
     /**
      * @param \Phalcon\DiInterface $di
+     *
+     * @return \Phalcon\Mvc\Model\Manager
      */
     protected function register(DiInterface $di)
     {
-        return new \Phalcon\Mvc\Model\Manager;
+        return new Manager;
     }
 }
