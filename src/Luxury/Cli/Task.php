@@ -64,6 +64,7 @@ class Task extends PhalconTask
         if ($this->hasOption('h', 'help')) {
             $this->dispatcher->forward([
                 'task'   => HelperTask::class,
+                'action' => 'main',
                 'params' => [
                     'task'   => $this->dispatcher->getHandlerClass(),
                     'action' => $this->dispatcher->getActionName(),
