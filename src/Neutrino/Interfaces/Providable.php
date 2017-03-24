@@ -5,7 +5,7 @@ namespace Neutrino\Interfaces;
 /**
  * Class Providable
  *
- *  @package Neutrino\Providers
+ * @package Neutrino\Providers
  */
 interface Providable
 {

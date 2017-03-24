@@ -3,6 +3,7 @@
 namespace Test\Cli\Tasks;
 
 use Neutrino\Cli\Output\ConsoleOutput;
+use Neutrino\Cli\Output\Helper;
 use Neutrino\Constants\Services;
 use Neutrino\Foundation\Cli\Tasks\HelperTask;
 use Neutrino\Foundation\Cli\Tasks\ListTask;
@@ -15,6 +16,22 @@ use Test\TestCase\TestCase;
 
 class HelperTaskTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        // Force Enable Decoration for windows
+        putenv('TERM=xterm');
+    }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+
+        // Force Enable Decoration for windows
+        putenv('TERM=');
+    }
+
     protected static function kernelClassInstance()
     {
         return StubKernelCli::class;
@@ -49,23 +66,27 @@ class HelperTaskTest extends TestCase
 
     public function dataMainAction()
     {
+        putenv('TERM=xterm');
         return [
             [HelperTask::class, 'main', [
                 'info'  => ['exactly' => 1, 'consecutive' => [["\t" . 'help ( .*)*']]],
-                'write' => ['exactly' => 3, 'consecutive' => [['Usage :', true], ['Description :', true], ["\t", true]]],
+                'write' => ['exactly' => 4, 'consecutive' => [
+                    [Helper::neutrinoVersion() . PHP_EOL, true], ['Usage :', true], ['Description :', true], ["\t", true]
+                ]],
             ]],
             [ListTask::class, 'main', [
                 'info'  => ['exactly' => 1, 'consecutive' => [["\t" . 'list']]],
-                'write' => ['exactly' => 3, 'consecutive' => [
-                    ['Usage :', true], ['Description :', true], ["\t" . 'List all commands available.', true]
+                'write' => ['exactly' => 4, 'consecutive' => [
+                    [Helper::neutrinoVersion() . PHP_EOL, true], ['Usage :', true], ['Description :', true], ["\t" . 'List all commands available.', true]
                 ]]
             ]],
             [OptimizeTask::class, 'main', [
                 'info'  => ['exactly' => 1],
-                'write' => ['exactly' => 5, 'consecutive' => [
+                'write' => ['exactly' => 6, 'consecutive' => [
+                    [Helper::neutrinoVersion() . PHP_EOL, true],
                     ['Usage :', true],
                     ['Description :', true],
-                    ["\t" . 'Optimize the loader.', true],
+                    ["\t" . 'Optimize the autoloader.', true],
                     ['Options :', true],
                     ["\t" . '-m, --memory: Optimize memory.', true],
                 ]]

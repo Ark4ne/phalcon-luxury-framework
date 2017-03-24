@@ -49,4 +49,19 @@ interface Kernelable
      * @return void
      */
     public function registerListeners();
+
+    /**
+     * Register the modules.
+     *
+     * @param array $modules
+     * @param bool  $merge
+     *
+     * @return
+     */
+    public function registerModules(array $modules, $merge = false);
+
+    /**
+     * @return void
+     */
+    public function boot();
 }

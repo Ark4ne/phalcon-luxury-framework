@@ -13,7 +13,7 @@ final class Services
 {
     const ACL                 = 'acl';
     const ANNOTATIONS         = 'annotations';
-    const APP                 = 'app';
+    const APP                 = 'application';
     const ASSETS              = 'assets';
     const AUTH                = 'auth';
     const CACHE               = 'cache';
@@ -29,6 +29,7 @@ final class Services
     const FLASH_SESSION       = 'flashSession';
     const HTTP_CLIENT         = 'httpClient';
     const LOGGER              = 'logger';
+    const MICRO_ROUTER        = 'micro.router';
     const MODELS_MANAGER      = 'modelsManager';
     const MODELS_METADATA     = 'modelsMetadata';
     const TRANSACTION_MANAGER = 'transactionManager';

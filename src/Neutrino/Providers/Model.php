@@ -25,7 +25,10 @@ class Model extends Injectable  implements Providable
         $di = $this->getDI();
 
         $di->setShared(Services::MODELS_MANAGER, ModelManager::class);
+        $di->setShared(ModelManager::class, ModelManager::class);
         $di->setShared(Services::MODELS_METADATA, ModelMetadataMemory::class);
+        $di->setShared(ModelMetadataMemory::class, ModelMetadataMemory::class);
         $di->setShared(Services::TRANSACTION_MANAGER, ModelTransactionManager::class);
+        $di->setShared(ModelTransactionManager::class, ModelTransactionManager::class);
     }
 }

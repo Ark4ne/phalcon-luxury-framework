@@ -22,6 +22,7 @@ namespace Neutrino\Error;
 
 use Neutrino\Constants\Env;
 use Neutrino\Constants\Services;
+use Neutrino\Dotenv;
 use Phalcon\Di;
 use Phalcon\Http\Response;
 use Phalcon\Logger;
@@ -42,7 +43,7 @@ class Handler
      */
     public static function register()
     {
-        switch (getenv('APP_ENV')) {
+        switch (Dotenv::env('APP_ENV')) {
             case Env::TEST:
             case Env::DEVELOPMENT:
             case Env::STAGING:

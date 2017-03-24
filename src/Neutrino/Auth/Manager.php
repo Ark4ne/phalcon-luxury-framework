@@ -5,8 +5,6 @@ namespace Neutrino\Auth;
 use Neutrino\Constants\Services;
 use Neutrino\Foundation\Auth\User;
 use Neutrino\Interfaces\Auth\Authenticable as AuthenticableInterface;
-use Neutrino\Support\Arr;
-use Neutrino\Support\Str;
 use Phalcon\Di\Injectable;
 
 /**
@@ -159,7 +157,7 @@ class Manager extends Injectable
         $this->{Services::SESSION}->set($this->sessionKey(), $user->getAuthIdentifier());
 
         if ($remember) {
-            $rememberToken = Str::random(60);
+            $rememberToken = str_random(60);
 
             /** @var \Phalcon\Http\Response\Cookies|\Phalcon\Http\Response\CookiesInterface $cookies */
             $cookies = $this->{Services::COOKIES};
@@ -255,13 +253,13 @@ class Manager extends Injectable
         $identifier = $class::getAuthIdentifierName();
         $password   = $class::getAuthPasswordName();
 
-        $user = $this->retrieveUserByIdentifier(Arr::fetch($credentials, $identifier));
+        $user = $this->retrieveUserByIdentifier(arr_fetch($credentials, $identifier));
 
         if ($user) {
             /** @var \Phalcon\Security $security */
             $security = $this->{Services::SECURITY};
 
-            if($security->checkHash(Arr::fetch($credentials, $password), $user->getAuthPassword())){
+            if($security->checkHash(arr_fetch($credentials, $password), $user->getAuthPassword())){
                 return $user;
             }
         }

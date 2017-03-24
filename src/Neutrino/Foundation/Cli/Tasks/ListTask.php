@@ -6,7 +6,6 @@ use Neutrino\Cli\Output\Decorate;
 use Neutrino\Cli\Output\Group;
 use Neutrino\Cli\Output\Helper;
 use Neutrino\Cli\Task;
-use Neutrino\Support\Arr;
 use Phalcon\Cli\Router\Route;
 
 /**
@@ -27,6 +26,8 @@ class ListTask extends Task
      */
     public function mainAction()
     {
+        $this->displayNeutrinoVersion();
+
         $routes = $this->router->getRoutes();
 
         $delimiter = Route::getDelimiter();
@@ -49,7 +50,7 @@ class ListTask extends Task
             $datas[$describe['cmd']] = $describe['description'];
         }
 
-        $this->line('Available Commands :');
+        $this->notice('Available Commands :');
 
         (new Group($this->output, $datas))->display();
     }
@@ -60,7 +61,7 @@ class ListTask extends Task
 
         $class = $paths['task'];
 
-        $action = Arr::fetch($paths, 'action', 'main') . $this->dispatcher->getActionSuffix();
+        $action = arr_fetch($paths, 'action', 'main') . $this->dispatcher->getActionSuffix();
 
         $this->scanned[$class . '::' . $action] = true;
 

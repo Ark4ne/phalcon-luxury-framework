@@ -26,7 +26,9 @@ class View extends Injectable implements Providable
         $di = $this->getDI();
 
         $di->setShared(Services::TAG, Tag::class);
+        $di->setShared(Tag::class, Tag::class);
         $di->setShared(Services::ASSETS, AssetsManager::class);
+        $di->setShared(AssetsManager::class, AssetsManager::class);
 
         $di->setShared(Services::VIEW, function () {
             /** @var DiInterface $this */

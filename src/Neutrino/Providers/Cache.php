@@ -28,9 +28,9 @@ class Cache extends Injectable implements Providable
         $di->setShared(Services::CACHE, CacheStrategy::class);
 
         // Registering All Cache Driver
-        $caches = $di->getShared(Services::CONFIG)->cache;
+        $cache = $di->getShared(Services::CONFIG)->cache;
 
-        foreach ($caches as $name => $cache) {
+        foreach ($cache->stores as $name => $cache) {
             $di->setShared(
                 Services::CACHE . '.' . $name,
                 function () use ($cache) {

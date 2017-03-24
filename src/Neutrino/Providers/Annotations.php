@@ -11,17 +11,13 @@ use Phalcon\Annotations\Adapter\Memory as AnnotationsMemory;
  *
  *  @package Neutrino\Providers
  */
-class Annotations extends Provider
+class Annotations extends BasicProvider
 {
+    protected $class = AnnotationsMemory::class;
+
     protected $name = Services::ANNOTATIONS;
 
     protected $shared = true;
 
-    /**
-     * @return \Phalcon\Annotations\Adapter\Memory
-     */
-    protected function register()
-    {
-        return new AnnotationsMemory;
-    }
+    protected $aliases = [AnnotationsMemory::class];
 }

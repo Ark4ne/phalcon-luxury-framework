@@ -2,9 +2,6 @@
 
 namespace Neutrino\Cli\Output;
 
-use Neutrino\Support\Arr;
-use Neutrino\Support\Str;
-
 /**
  * Class Table
  *
@@ -63,7 +60,7 @@ class Table
     {
         foreach ($this->datas as $data) {
             foreach ($data as $column => $value) {
-                if (!Arr::has($this->columns, $column) || !Arr::has($this->columns[$column], 'size')) {
+                if (!arr_has($this->columns, $column) || !arr_has($this->columns[$column], 'size')) {
                     $this->columns[$column] = [
                         'size' => max(Helper::strlenWithoutDecoration($column), Helper::strlenWithoutDecoration($value))
                     ];
@@ -95,7 +92,7 @@ class Table
         $closure = $this->style === self::NO_STYLE ? '' : '|';
         $line    = $closure;
         foreach ($this->columns as $column => $opts) {
-            $line .= ' ' . Helper::strPad(Str::upper($column), $opts['size'], ' ') . ' ' . $closure;
+            $line .= ' ' . Helper::strPad(str_upper($column), $opts['size'], ' ') . ' ' . $closure;
         }
         $this->output->write($line, true);
     }
@@ -116,7 +113,7 @@ class Table
         foreach ($this->datas as $data) {
             $line = $closure;
             foreach ($this->columns as $column => $opts) {
-                $line .= ' ' . Helper::strPad(Arr::fetch($data, $column, ''), $opts['size'], ' ') . ' ' . $closure;
+                $line .= ' ' . Helper::strPad(arr_fetch($data, $column, ''), $opts['size'], ' ') . ' ' . $closure;
             }
             $this->output->write($line, true);
         }

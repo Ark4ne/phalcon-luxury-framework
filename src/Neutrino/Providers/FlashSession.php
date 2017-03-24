@@ -11,17 +11,13 @@ use Phalcon\Flash\Session;
  *
  *  @package Neutrino\Providers
  */
-class FlashSession extends Provider
+class FlashSession extends BasicProvider
 {
+    protected $class = Session::class;
+
     protected $name = Services::FLASH_SESSION;
 
     protected $shared = true;
 
-    /**
-     * @return \Phalcon\Flash\Session
-     */
-    protected function register()
-    {
-        return new Session;
-    }
+    protected $aliases = [Session::class];
 }

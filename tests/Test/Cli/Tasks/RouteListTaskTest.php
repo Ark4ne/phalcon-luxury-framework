@@ -5,6 +5,7 @@ namespace Test\Cli\Tasks;
 use Neutrino\Cli\Output\ConsoleOutput;
 use Neutrino\Cli\Output\Decorate;
 use Neutrino\Constants\Services;
+use Neutrino\Dotenv;
 use Neutrino\Foundation\Cli\Tasks\RouteListTask;
 use Phalcon\Cli\Dispatcher;
 use Phalcon\Events\Manager;
@@ -21,10 +22,7 @@ class RouteListTaskTest extends TestCase
 
     public function testGetHttpRoute()
     {
-        $this->app->config->paths = (object)[
-            'routes' => __DIR__ . '/../../Stub/'
-        ];
-
+        Dotenv::put('BASE_PATH', __DIR__ . '/../../Stub');
         $expectedRoutes = [
             ['pattern' => '/get', 'paths' => ['controller' => 'Stub', 'action' => 'index']]
         ];
@@ -53,9 +51,7 @@ class RouteListTaskTest extends TestCase
 
     public function testMainAction()
     {
-        $this->app->config->paths = (object)[
-            'routes' => __DIR__ . '/../../Stub/'
-        ];
+        Dotenv::put('BASE_PATH', __DIR__ . '/../../Stub');
 
         $expected = [
             'write' => ['exactly' => 8, 'consecutive' => [
@@ -96,9 +92,7 @@ class RouteListTaskTest extends TestCase
 
     public function testMainActionNoSubstitution()
     {
-        $this->app->config->paths = (object)[
-            'routes' => __DIR__ . '/../../Stub/'
-        ];
+        Dotenv::put('BASE_PATH', __DIR__ . '/../../Stub');
 
         $expected = [
             'write' => ['exactly' => 8, 'consecutive' => [

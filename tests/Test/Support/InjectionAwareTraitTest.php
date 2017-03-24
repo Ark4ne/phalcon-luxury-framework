@@ -39,7 +39,7 @@ class InjectionAwareTraitTest extends TestCase
             'eventsManager'      => \Phalcon\Events\Manager::class,
             'transactionManager' => \Phalcon\Mvc\Model\Transaction\Manager::class,
             'assets'             => \Phalcon\Assets\Manager::class,
-            'app'                => \Phalcon\Application::class,
+            'application'        => \Phalcon\Application::class,
             'config'             => \Phalcon\Config::class,
             'cache'              => \Neutrino\Cache\CacheStrategy::class,
         ];

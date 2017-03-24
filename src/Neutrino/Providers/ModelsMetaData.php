@@ -11,17 +11,13 @@ use Phalcon\Mvc\Model\Metadata\Memory;
  *
  *  @package Neutrino\Foundation\Bootstrap
  */
-class ModelsMetaData extends Provider
+class ModelsMetaData extends BasicProvider
 {
+    protected $class = Memory::class;
+
     protected $name = Services::MODELS_METADATA;
 
     protected $shared = true;
 
-    /**
-     * @return Memory
-     */
-    protected function register()
-    {
-        return new Memory;
-    }
+    protected $aliases = [Memory::class];
 }

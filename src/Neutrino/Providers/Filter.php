@@ -10,17 +10,13 @@ use Neutrino\Constants\Services;
  *
  *  @package Neutrino\Providers
  */
-class Filter extends Provider
+class Filter extends BasicProvider
 {
+    protected $class = \Phalcon\Filter::class;
+
     protected $name = Services::FILTER;
 
     protected $shared = true;
 
-    /**
-     * @return mixed|\Phalcon\Filter
-     */
-    protected function register()
-    {
-        return new \Phalcon\Filter;
-    }
+    protected $aliases = [\Phalcon\Filter::class];
 }

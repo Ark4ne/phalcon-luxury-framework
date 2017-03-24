@@ -46,15 +46,17 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::ANNOTATIONS,
                     'class'  => AnnotationsAdapterMemory::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [AnnotationsAdapterMemory::class]
                 ]
             ]],
-            
+
             Services::AUTH => [Auth::class, [
                 [
                     'name'   => Services::AUTH,
                     'class'  => AuthManager::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [AuthManager::class]
                 ]
             ]],
 
@@ -70,7 +72,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::COOKIES,
                     'class'  => \Phalcon\Http\Response\Cookies::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [\Phalcon\Http\Response\Cookies::class]
                 ]
             ]],
 
@@ -78,7 +81,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::CRYPT,
                     'class'  => \Phalcon\Crypt::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [\Phalcon\Crypt::class]
                 ]
             ]],
 
@@ -86,7 +90,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::ESCAPER,
                     'class'  => \Phalcon\Escaper::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [\Phalcon\Escaper::class]
                 ]
             ]],
 
@@ -94,7 +99,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::FILTER,
                     'class'  => \Phalcon\Filter::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [\Phalcon\Filter::class]
                 ]
             ]],
 
@@ -102,7 +108,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::FLASH,
                     'class'  => FlashDirect::class,
-                    'shared' => false
+                    'shared' => false,
+                    'aliases' => [FlashDirect::class]
                 ]
             ]],
 
@@ -110,7 +117,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::FLASH_SESSION,
                     'class'  => FlashSession::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [FlashSession::class]
                 ]
             ]],
 
@@ -118,15 +126,18 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::MODELS_MANAGER,
                     'class'  => ModelManager::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [ModelManager::class]
                 ], [
                     'name'   => Services::MODELS_METADATA,
                     'class'  => ModelMetadataMemory::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [ModelMetadataMemory::class]
                 ], [
                     'name'   => Services::TRANSACTION_MANAGER,
                     'class'  => ModelTransactionManager::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [ModelTransactionManager::class]
                 ]
             ]],
 
@@ -134,7 +145,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::MODELS_MANAGER,
                     'class'  => ModelManager::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [ModelManager::class]
                 ]
             ]],
 
@@ -142,7 +154,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::MODELS_METADATA,
                     'class'  => ModelMetadataMemory::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [ModelMetadataMemory::class]
                 ]
             ]],
 
@@ -150,7 +163,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::TRANSACTION_MANAGER,
                     'class'  => ModelTransactionManager::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [ModelTransactionManager::class]
                 ]
             ]],
 
@@ -158,7 +172,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::SECURITY,
                     'class'  => \Phalcon\Security::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [\Phalcon\Security::class]
                 ]
             ]],
 
@@ -166,7 +181,8 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::URL,
                     'class'  => \Phalcon\Mvc\Url::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [\Phalcon\Mvc\Url::class]
                 ]
             ]],
 
@@ -174,15 +190,17 @@ class AllProvidersTest extends TestCase
                 [
                     'name'   => Services::VIEW,
                     'class'  => \Phalcon\Mvc\View::class,
-                    'shared' => true
+                    'shared' => true,
                 ], [
                     'name'   => Services::TAG,
                     'class'  => \Phalcon\Tag::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [\Phalcon\Tag::class]
                 ], [
                     'name'   => Services::ASSETS,
                     'class'  => \Phalcon\Assets\Manager::class,
-                    'shared' => true
+                    'shared' => true,
+                    'aliases' => [\Phalcon\Assets\Manager::class]
                 ]
             ]],
         ];
@@ -193,12 +211,18 @@ class AllProvidersTest extends TestCase
         global $config;
 
         $config = array_merge($config, [
-            'cache'    => [],
-            'log'      => [
+            'cache' => [
+                'stores' => ['memory' => [
+                    'driver' => \Phalcon\Cache\Backend\Memory::class,
+                    'adapter' => 'None',
+                ]],
+                'default' => 'memory'
+            ],
+            'log'   => [
                 'adapter' => 'Multiple',
                 'path'    => __DIR__ . '/../../.data/'
             ],
-            'view'     => [
+            'view'  => [
                 'views_dir'     => '',
                 'compiled_path' => ''
             ]
@@ -223,6 +247,16 @@ class AllProvidersTest extends TestCase
                 $providedInstance['class'],
                 $providedInstance['shared']
             );
+
+            if(isset($providedInstance['aliases'])){
+                foreach ($providedInstance['aliases'] as $alias) {
+                    $this->assertProvided(
+                        $alias,
+                        $providedInstance['class'],
+                        $providedInstance['shared']
+                    );
+                }
+            }
         }
     }
 
@@ -232,7 +266,7 @@ class AllProvidersTest extends TestCase
      */
     public function assertProvided($serviceName, $instanceClass, $shared)
     {
-        $this->assertTrue($this->getDI()->has($serviceName));
+        $this->assertTrue($this->getDI()->has($serviceName), "\$this->getDI()->has('{$serviceName}')");
 
 
         $this->assertEquals($shared, $this->getDI()->getService($serviceName)->isShared());

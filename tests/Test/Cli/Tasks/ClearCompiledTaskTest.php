@@ -2,6 +2,7 @@
 
 namespace Test\Cli\Tasks;
 
+use Neutrino\Dotenv;
 use Test\Stub\StubKernelCli;
 use Test\TestCase\TestCase;
 
@@ -12,6 +13,22 @@ use Test\TestCase\TestCase;
  */
 class ClearCompiledTaskTest extends TestCase
 {
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+
+        // Force Enable Decoration for windows
+        putenv('TERM=xterm');
+    }
+
+    public static function tearDownAfterClass()
+    {
+        parent::tearDownAfterClass();
+
+        // Force Enable Decoration for windows
+        putenv('TERM=');
+    }
+
     protected static function kernelClassInstance()
     {
         return StubKernelCli::class;
@@ -43,6 +60,8 @@ class ClearCompiledTaskTest extends TestCase
     public function testTask()
     {
         file_put_contents(__DIR__ . '/../../../' . '/bootstrap/compile/loader.php', '<?php');
+
+        Dotenv::put('BASE_PATH', __DIR__ . '/../../../');
 
         $this->dispatchCli('luxury clear-compiled -q');
 

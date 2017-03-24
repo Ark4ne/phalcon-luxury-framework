@@ -2,10 +2,9 @@
 
 namespace Neutrino\Test;
 
+use Mockery;
 use Neutrino\Foundation\Kernelize;
 use Neutrino\Support\Facades\Facade;
-use Mockery;
-use Phalcon\Application;
 use Phalcon\Config;
 use Phalcon\Config as PhConfig;
 use Phalcon\Di\InjectionAwareInterface;
@@ -29,7 +28,7 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
     protected $config;
 
     /**
-     * @var Application|Kernelize
+     * @var \Phalcon\Application|\Phalcon\Cli\Console|\Neutrino\Foundation\Kernelize
      */
     protected $app;
 

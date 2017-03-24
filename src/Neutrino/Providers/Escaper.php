@@ -10,17 +10,13 @@ use Neutrino\Constants\Services;
  *
  *  @package Neutrino\Providers
  */
-class Escaper extends Provider
+class Escaper extends BasicProvider
 {
+    protected $class = \Phalcon\Escaper::class;
+
     protected $name = Services::ESCAPER;
 
     protected $shared = true;
 
-    /**
-     * @return \Phalcon\Escaper
-     */
-    protected function register()
-    {
-        return new \Phalcon\Escaper;
-    }
+    protected $aliases = [\Phalcon\Escaper::class];
 }

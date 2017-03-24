@@ -2,22 +2,20 @@
 
 namespace Neutrino\Foundation\Http;
 
+use Neutrino\Dotenv;
 use Neutrino\Foundation\Kernelize;
 use Neutrino\Interfaces\Kernelable;
-use Phalcon\Config;
 use Phalcon\Di\FactoryDefault as Di;
 use Phalcon\Mvc\Application;
 
 /**
  * Class Http
  *
- *  @package Neutrino\Foundation\Kernel
+ * @package Neutrino\Foundation\Kernel
  */
 abstract class Kernel extends Application implements Kernelable
 {
-    use Kernelize {
-        bootstrap as kernelizeBootstrap;
-    }
+    use Kernelize;
 
     /**
      * Return the Provider List to load.
@@ -41,6 +39,13 @@ abstract class Kernel extends Application implements Kernelable
     protected $listeners = [];
 
     /**
+     * Return the modules to attach onto the application.
+     *
+     * @var string[]
+     */
+    protected $modules = [];
+
+    /**
      * The DependencyInjection class to use.
      *
      * @var string
@@ -48,32 +53,15 @@ abstract class Kernel extends Application implements Kernelable
     protected $dependencyInjection = Di::class;
 
     /**
-     * Application constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct(null);
-    }
-
-    /**
-     * Application starter
-     *
-     * @param \Phalcon\Config $config
-     *
-     * @return void
-     */
-    public function bootstrap(Config $config)
-    {
-        $this->kernelizeBootstrap($config);
-
-        $this->useImplicitView(isset($config->view->implicit) ? $config->view->implicit : false);
-    }
-
-    /**
      * Register the routes of the application.
      */
     public function registerRoutes()
     {
-        require $this->config->paths->routes . 'http.php';
+        require Dotenv::env('BASE_PATH') .'/routes/http.php';
+    }
+
+    public function boot()
+    {
+        $this->useImplicitView(isset($this->config->view->implicit) ? $this->config->view->implicit : false);
     }
 }

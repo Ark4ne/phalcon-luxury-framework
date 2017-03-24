@@ -6,6 +6,7 @@ use Phalcon\Cache\Backend;
 use Phalcon\Cache\Frontend\Base64;
 use Phalcon\Cache\Frontend\Data;
 use Phalcon\Cache\Frontend\Json;
+use Phalcon\Cache\Frontend\None;
 use Test\TestCase\TestCase;
 use Test\TestCase\UseCaches;
 
@@ -49,6 +50,9 @@ class CacheStrategyTest extends TestCase
     public function testUses()
     {
         $cacheInstance = Cache::uses();
+        $this->assertInstanceOf(None::class, $cacheInstance->getFrontend());
+
+        $cacheInstance = Cache::uses('file');
         $this->assertInstanceOf(Data::class, $cacheInstance->getFrontend());
 
         $cacheInstance = Cache::uses('fast');

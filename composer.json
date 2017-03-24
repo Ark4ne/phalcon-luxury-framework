@@ -3,7 +3,7 @@
   "description": "Phalcon extended framework. (Nucleon:Kernel)",
   "keywords": ["framework", "phalcon", "nucleon"],
   "minimum-stability": "stable",
-  "license": "GNU",
+  "license": "MIT",
   "authors": [
     {
       "name": "Ark4ne (Guillaume Allegret)",
@@ -21,7 +21,16 @@
     "mockery/mockery": "~0.9.4",
     "satooshi/php-coveralls": "~1.0"
   },
+  "replace" : {
+    "neutrino/dotenv": "self.version",
+    "neutrino/optimizer": "self.version"
+  },
   "autoload": {
+    "files": [
+      "src/Neutrino/Support/helpers/arr.php",
+      "src/Neutrino/Support/helpers/obj.php",
+      "src/Neutrino/Support/helpers/str.php"
+    ],
     "psr-4": {
       "Neutrino\\": "src/Neutrino/"
     }

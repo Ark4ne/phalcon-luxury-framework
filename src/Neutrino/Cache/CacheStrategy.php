@@ -22,13 +22,11 @@ class CacheStrategy extends Strategy implements BackendInterface
      */
     public function __construct()
     {
-        $caches = $this->{Services::CONFIG}->cache;
+        $cache = $this->{Services::CONFIG}->cache;
 
-        foreach ($caches as $name => $cache) {
-            if (!isset($this->default)) {
-                $this->default = $name;
-            }
+        $this->default = $cache->default;
 
+        foreach ($cache->stores as $name => $cache) {
             $this->supported[] = $name;
         }
     }

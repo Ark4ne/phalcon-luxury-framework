@@ -2,12 +2,15 @@
 
 namespace Neutrino\Http;
 
+use Neutrino\Constants\Services;
+
 /**
  * Class Controller
  *
  *  @package Neutrino\Foundation
  *
- * @property-read \Phalcon\Application|\Neutrino\Foundation\Kernelize $app
+ * @property-read \Phalcon\Application|\Phalcon\Mvc\Application|\Phalcon\Cli\Console|\Phalcon\Mvc\Micro $application
+ * @property-read \Phalcon\Config|\stdClass|\ArrayAccess                                                $config
  */
 abstract class Controller extends \Phalcon\Mvc\Controller
 {
@@ -78,7 +81,7 @@ abstract class Controller extends \Phalcon\Mvc\Controller
     {
         $middleware = new $middlewareClass(static::class, ...$params);
 
-        $this->app->attach($middleware);
+        $this->{Services::APP}->attach($middleware);
 
         return $middleware;
     }

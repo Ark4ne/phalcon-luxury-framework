@@ -9,17 +9,13 @@ use Neutrino\Constants\Services;
  *
  *  @package Neutrino\Providers
  */
-class Security extends Provider
+class Security extends BasicProvider
 {
+    protected $class = \Phalcon\Security::class;
+
     protected $name = Services::SECURITY;
 
     protected $shared = true;
 
-    /**
-     * @return \Phalcon\Security
-     */
-    protected function register()
-    {
-        return new \Phalcon\Security;
-    }
+    protected $aliases = [\Phalcon\Security::class];
 }

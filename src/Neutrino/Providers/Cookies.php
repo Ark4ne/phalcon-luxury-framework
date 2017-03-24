@@ -10,18 +10,13 @@ use Neutrino\Constants\Services;
  *
  *  @package Neutrino\Providers
  */
-class Cookies extends Provider
+class Cookies extends BasicProvider
 {
+    protected $class = \Phalcon\Http\Response\Cookies::class;
 
     protected $name = Services::COOKIES;
 
     protected $shared = true;
 
-    /**
-     * @return \Phalcon\Http\Response\Cookies
-     */
-    protected function register()
-    {
-        return new \Phalcon\Http\Response\Cookies;
-    }
+    protected $aliases = [\Phalcon\Http\Response\Cookies::class];
 }

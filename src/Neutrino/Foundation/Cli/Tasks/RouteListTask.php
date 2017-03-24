@@ -5,9 +5,8 @@ namespace Neutrino\Foundation\Cli\Tasks;
 use Neutrino\Cli\Output\Helper;
 use Neutrino\Cli\Task;
 use Neutrino\Constants\Services;
-use Neutrino\Support\Arr;
+use Neutrino\Dotenv;
 use Neutrino\Support\Facades\Router;
-use Neutrino\Support\Str;
 
 /**
  * Class RouteListTask
@@ -43,7 +42,7 @@ class RouteListTask extends Task
             if (is_array($httpMethods)) {
                 $httpMethods = implode('|', $httpMethods);
             }
-            $middlewares = Arr::fetch($paths, 'middleware');
+            $middlewares = arr_fetch($paths, 'middleware');
             if (is_array($middlewares)) {
                 $_middlewares = [];
                 foreach ($middlewares as $key => $middleware) {
@@ -62,8 +61,8 @@ class RouteListTask extends Task
                 'name'       => $route->getName(),
                 'method'     => $httpMethods,
                 'pattern'    => $compiled,
-                'action'     => Arr::fetch($paths, 'namespace', 'App\\Http\\Controllers') .
-                    '\\' . Str::capitalize($paths['controller']) . 'Controller::' . $paths['action'],
+                'action'     => arr_fetch($paths, 'namespace', 'App\\Http\\Controllers') .
+                    '\\' . str_capitalize($paths['controller']) . 'Controller::' . $paths['action'],
                 'middleware' => $middleware
             ];
         }
@@ -83,7 +82,7 @@ class RouteListTask extends Task
 
         $httpRouterProvider->registering();
 
-        require $this->config->paths->routes . 'http.php';
+        require Dotenv::env('BASE_PATH') .'/routes/http.php';
 
         $routes = Router::getRoutes();
 

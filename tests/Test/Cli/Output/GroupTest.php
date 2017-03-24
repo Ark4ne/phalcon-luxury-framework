@@ -14,6 +14,22 @@ use Test\TestCase\TestCase;
  */
 class GroupTest extends TestCase
 {
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+
+        // Force Enable Decoration for windows
+        putenv('TERM=xterm');
+    }
+
+    public static function tearDownAfterClass()
+    {
+        parent::tearDownAfterClass();
+
+        // Force Enable Decoration for windows
+        putenv('TERM=');
+    }
+
     /**
      * @return mixed|ConsoleOutput
      */
@@ -89,7 +105,7 @@ class GroupTest extends TestCase
         return [
             [
                 ' list        all commands ' . PHP_EOL .
-                'route' . PHP_EOL .
+                "\033[33mroute\033[39m" . PHP_EOL .
                 ' route:list  all routes   ' . PHP_EOL,
                 [
                     'list'       => 'all commands',
@@ -98,11 +114,11 @@ class GroupTest extends TestCase
             ],
             [
                 ' list         all commands       ' . PHP_EOL .
-                'route' . PHP_EOL .
+                "\033[33mroute\033[39m" . PHP_EOL .
                 ' route:list   all routes         ' . PHP_EOL .
                 ' route:cache  cache routes       ' . PHP_EOL .
                 ' route:clear  clear cache routes ' . PHP_EOL .
-                'view' . PHP_EOL .
+                "\033[33mview\033[39m" . PHP_EOL .
                 ' view:clear   clear views        ' . PHP_EOL,
                 [
                     'list'        => 'all commands',
@@ -115,11 +131,11 @@ class GroupTest extends TestCase
             [
 
                 ' list         all commands       ' . PHP_EOL .
-                'route' . PHP_EOL .
+                "\033[33mroute\033[39m" . PHP_EOL .
                 ' route:list   all routes         ' . PHP_EOL .
                 " \033[32mroute:cache\033[39m  cache routes       " . PHP_EOL .
                 " \033[32mroute:clear\033[39m  clear cache routes " . PHP_EOL .
-                'view' . PHP_EOL .
+                "\033[33mview\033[39m" . PHP_EOL .
                 " \033[32mview:clear\033[39m   clear views        " . PHP_EOL,
                 [
                     'list'                        => 'all commands',

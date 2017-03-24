@@ -2,6 +2,7 @@
 
 namespace Neutrino\Foundation\Cli;
 
+use Neutrino\Dotenv;
 use Neutrino\Foundation\Kernelize;
 use Neutrino\Interfaces\Kernelable;
 use Phalcon\Cli\Console;
@@ -41,6 +42,13 @@ abstract class Kernel extends Console implements Kernelable
     protected $listeners = [];
 
     /**
+     * Return the modules to attach onto the application.
+     *
+     * @var string[]
+     */
+    protected $modules = [];
+
+    /**
      * The DependencyInjection class to use.
      *
      * @var string
@@ -60,6 +68,8 @@ abstract class Kernel extends Console implements Kernelable
      */
     public function registerRoutes()
     {
-        require $this->config->paths->routes . 'cli.php';
+        require Dotenv::env('BASE_PATH') .'/routes/cli.php';
     }
+
+    public function boot(){}
 }

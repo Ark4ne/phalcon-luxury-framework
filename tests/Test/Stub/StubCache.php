@@ -2,7 +2,6 @@
 
 namespace Test\Stub;
 
-use Neutrino\Support\Str;
 use Phalcon\Cache\Backend;
 use Phalcon\Cache\BackendInterface;
 use Phalcon\Cache\Frontend\None;
@@ -86,7 +85,7 @@ class StubCache extends Backend implements BackendInterface
 
         $found = [];
         foreach ($this->registry as $key => $value) {
-            if (Str::startsWith($key, $prefix)) {
+            if (str_startsWith($key, $prefix)) {
                 $found[$key] = $value;
             }
         }

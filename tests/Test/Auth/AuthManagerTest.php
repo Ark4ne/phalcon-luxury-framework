@@ -13,7 +13,6 @@ use Neutrino\Auth\Manager as AuthManager;
 use Neutrino\Constants\Services;
 use Neutrino\Foundation\Auth\User;
 use Neutrino\Support\Facades\Auth;
-use Neutrino\Support\Str;
 use Phalcon\Db\Column;
 use Phalcon\Http\Response\Cookies;
 use Phalcon\Security;
@@ -228,7 +227,7 @@ class AuthManagerTest extends TestCase
         $cookies = $this->getDI()->getShared(Services::COOKIES);
         /** @var Security $security */
         $security = $this->getDI()->getShared(Services::SECURITY);
-        $token = Str::random(60);
+        $token = str_random(60);
 
         $this->mockDb(1, [
             [

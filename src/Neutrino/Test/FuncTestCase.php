@@ -237,8 +237,11 @@ abstract class FuncTestCase extends TestCase
      * @param string $url    request url
      * @param string $method request method
      * @param array  $params request params
+     * @param mixed  &$output
+     *
+     * @throws \Error|\Exception
      */
-    protected function dispatch($url, $method = 'GET', $params = [])
+    protected function dispatch($url, $method = 'GET', $params = [], &$output = '')
     {
         $_SERVER['REQUEST_METHOD'] = $method;
 
@@ -254,7 +257,21 @@ abstract class FuncTestCase extends TestCase
             }
         }
 
-        $this->getDI()->setShared(Services::RESPONSE, $this->app->handle($url));
+        ob_start();
+        try {
+            $this->getDI()->setShared(Services::RESPONSE, $this->app->handle($url));
+        } catch(\Exception $e) {
+        } catch(\Error $e) {
+        }
+
+        if(isset($e)){
+            ob_end_clean();
+
+            throw $e;
+        }
+
+        $output = ob_get_clean();
+
 
         foreach ($params as $key => $param) {
             switch ($method) {

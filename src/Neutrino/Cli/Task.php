@@ -4,10 +4,10 @@ namespace Neutrino\Cli;
 
 use Neutrino\Cli\Output\ConsoleOutput;
 use Neutrino\Cli\Output\Decorate;
+use Neutrino\Cli\Output\Helper;
 use Neutrino\Cli\Output\Table;
 use Neutrino\Constants\Events;
 use Neutrino\Foundation\Cli\Tasks\HelperTask;
-use Neutrino\Support\Arr;
 use Phalcon\Cli\Task as PhalconTask;
 use Phalcon\Events\Event;
 
@@ -16,11 +16,10 @@ use Phalcon\Events\Event;
  *
  *  @package Neutrino\Cli
  *
- * @property-read \Neutrino\Cache\CacheStrategy          $cache
- * @property-read \Phalcon\Mvc\Application               $app
- * @property-read \Phalcon\Config|\stdClass|\ArrayAccess $config
- * @property-read \Neutrino\Cli\Router                   $router
- * @property-read \Phalcon\Cli\Dispatcher                $dispatcher
+ * @property-read \Phalcon\Application|\Phalcon\Mvc\Application|\Phalcon\Cli\Console|\Phalcon\Mvc\Micro $application
+ * @property-read \Phalcon\Config|\stdClass|\ArrayAccess                                                $config
+ * @property-read \Neutrino\Cli\Router                                                                  $router
+ * @property-read \Phalcon\Cli\Dispatcher                                                               $dispatcher
  */
 abstract class Task extends PhalconTask
 {
@@ -98,6 +97,11 @@ abstract class Task extends PhalconTask
         $this->line("\ttime:" . Decorate::info((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'])));
     }
 
+    public function displayNeutrinoVersion()
+    {
+        $this->output->write(Helper::neutrinoVersion() . PHP_EOL, true);
+    }
+
     public function line($str)
     {
         $this->output->write($str, true);
@@ -154,7 +158,7 @@ abstract class Task extends PhalconTask
      */
     protected function getArg($name, $default = null)
     {
-        return Arr::fetch($this->getArgs(), $name, $default);
+        return arr_fetch($this->getArgs(), $name, $default);
     }
 
     /**
@@ -166,7 +170,7 @@ abstract class Task extends PhalconTask
      */
     protected function hasArg($name)
     {
-        return Arr::has($this->getArgs(), $name);
+        return arr_has($this->getArgs(), $name);
     }
 
     /**
@@ -189,7 +193,7 @@ abstract class Task extends PhalconTask
      */
     protected function getOption($name, $default = null)
     {
-        return Arr::fetch($this->getOptions(), $name, $default);
+        return arr_fetch($this->getOptions(), $name, $default);
     }
 
     /**
@@ -202,7 +206,7 @@ abstract class Task extends PhalconTask
     protected function hasOption(...$options)
     {
         foreach ($options as $option) {
-            if (Arr::has($this->getOptions(), $option)) {
+            if (arr_has($this->getOptions(), $option)) {
                 return true;
             }
         }

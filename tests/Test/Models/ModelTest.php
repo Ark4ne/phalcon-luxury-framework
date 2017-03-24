@@ -3,7 +3,6 @@
 namespace Test\Models;
 
 use Neutrino\Model;
-use Neutrino\Support\Arr;
 use Phalcon\Db\Column;
 use Phalcon\Mvc\Model\MetaData;
 use Test\TestCase\TestCase;
@@ -265,7 +264,7 @@ class ModelTest extends TestCase
 
         $this->assertColumnAdded($name, $type, $expectedBind, $numeric, get_class($model));
 
-        if (Arr::fetch($options, 'nullable')) {
+        if (arr_fetch($options, 'nullable')) {
             $this->assertArrayHasKey(MetaData::MODELS_EMPTY_STRING_VALUES, $meta);
             $this->assertEquals([$name => true], $meta[MetaData::MODELS_EMPTY_STRING_VALUES]);
         } else {
@@ -273,19 +272,19 @@ class ModelTest extends TestCase
             $this->assertEquals([$name], $meta[MetaData::MODELS_NOT_NULL]);
         }
 
-        if (!is_null(Arr::fetch($options, 'default'))) {
+        if (!is_null(arr_fetch($options, 'default'))) {
             $this->assertArrayHasKey(MetaData::MODELS_DEFAULT_VALUES, $meta);
-            $this->assertEquals([$name => Arr::fetch($options, 'default')], $meta[MetaData::MODELS_DEFAULT_VALUES]);
+            $this->assertEquals([$name => arr_fetch($options, 'default')], $meta[MetaData::MODELS_DEFAULT_VALUES]);
         } else {
             $this->assertEmpty($meta[MetaData::MODELS_DEFAULT_VALUES]);
         }
 
-        if (Arr::fetch($options, 'autoInsert')) {
+        if (arr_fetch($options, 'autoInsert')) {
             $this->assertArrayHasKey(MetaData::MODELS_AUTOMATIC_DEFAULT_INSERT, $meta);
             $this->assertEquals([$name => true], $meta[MetaData::MODELS_AUTOMATIC_DEFAULT_INSERT]);
         }
 
-        if (Arr::fetch($options, 'autoUpdate')) {
+        if (arr_fetch($options, 'autoUpdate')) {
             $this->assertArrayHasKey(MetaData::MODELS_AUTOMATIC_DEFAULT_UPDATE, $meta);
             $this->assertEquals([$name => true], $meta[MetaData::MODELS_AUTOMATIC_DEFAULT_UPDATE]);
         }

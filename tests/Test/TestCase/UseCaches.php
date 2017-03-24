@@ -20,30 +20,37 @@ trait UseCaches
 
         $config = array_merge($config, [
             'cache' => [
-                'default' => [
-                    'adapter' => 'Data', // Files, Memcache, Libmemcached, Redis
-                    'driver'  => 'File', // Files, Memcache, Libmemcached, Redis
-                    'options' => ['cacheDir' => static::$cache_dir],
-                ],
-                'fast'    => [
-                    'adapter' => 'Json', // Files, Memcache, Libmemcached, Redis
-                    'driver'  => 'File', // Files, Memcache, Libmemcached, Redis
-                    'options' => ['cacheDir' => static::$cache_dir],
-                ],
-                'slow'    => [
-                    'adapter' => 'Base64', // Files, Memcache, Libmemcached, Redis
-                    'driver'  => 'File', // Files, Memcache, Libmemcached, Redis
-                    'options' => ['cacheDir' => static::$cache_dir],
-                ],
-                'output'  => [
-                    'adapter' => 'Output', // Files, Memcache, Libmemcached, Redis
-                    'driver'  => 'File', // Files, Memcache, Libmemcached, Redis
-                    'options' => ['cacheDir' => static::$cache_dir],
-                ],
-                'stub'    => [
-                    'adapter' => 'Data', // Files, Memcache, Libmemcached, Redis
-                    'driver'  => StubBackend::class, // Files, Memcache, Libmemcached, Redis
-                    'options' => ['cacheDir' => static::$cache_dir],
+                'default' => 'memory',
+                'stores' => [
+                    'memory' => [
+                        'driver' => \Phalcon\Cache\Backend\Memory::class,
+                        'adapter' => 'None',
+                    ],
+                    'file'   => [
+                        'adapter' => 'Data', // Files, Memcache, Libmemcached, Redis
+                        'driver'  => 'File', // Files, Memcache, Libmemcached, Redis
+                        'options' => ['cacheDir' => static::$cache_dir],
+                    ],
+                    'fast'    => [
+                        'adapter' => 'Json', // Files, Memcache, Libmemcached, Redis
+                        'driver'  => 'File', // Files, Memcache, Libmemcached, Redis
+                        'options' => ['cacheDir' => static::$cache_dir],
+                    ],
+                    'slow'    => [
+                        'adapter' => 'Base64', // Files, Memcache, Libmemcached, Redis
+                        'driver'  => 'File', // Files, Memcache, Libmemcached, Redis
+                        'options' => ['cacheDir' => static::$cache_dir],
+                    ],
+                    'output'  => [
+                        'adapter' => 'Output', // Files, Memcache, Libmemcached, Redis
+                        'driver'  => 'File', // Files, Memcache, Libmemcached, Redis
+                        'options' => ['cacheDir' => static::$cache_dir],
+                    ],
+                    'stub'    => [
+                        'adapter' => 'Data', // Files, Memcache, Libmemcached, Redis
+                        'driver'  => StubBackend::class, // Files, Memcache, Libmemcached, Redis
+                        'options' => ['cacheDir' => static::$cache_dir],
+                    ]
                 ]
             ]
         ]);
@@ -60,7 +67,7 @@ trait UseCaches
 
     public function tearDown()
     {
-        Cache::uses('default');
+        Cache::uses('file');
 
         parent::tearDown();
     }

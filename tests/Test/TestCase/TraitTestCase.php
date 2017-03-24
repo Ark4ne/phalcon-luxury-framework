@@ -22,7 +22,13 @@ trait TraitTestCase
         global $config;
 
         $config = array_merge($config, [
-            'cache'       => [],
+            'cache'       => [
+                'stores' => ['memory' => [
+                    'driver' => \Phalcon\Cache\Backend\Memory::class,
+                    'adapter' => 'None',
+                ]],
+                'default' => 'memory'
+            ],
             'app' => ['base_uri' => '/']
         ]);
 

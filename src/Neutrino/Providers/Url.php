@@ -16,6 +16,8 @@ class Url extends Provider
 
     protected $shared = true;
 
+    protected $aliases = [\Phalcon\Mvc\Url::class];
+
     /**
      * The URL component is used to generate all kind of urls in the application
      *

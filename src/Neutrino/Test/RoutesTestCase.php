@@ -2,6 +2,7 @@
 
 namespace Neutrino\Test;
 
+use Neutrino\Dotenv;
 use Neutrino\Providers\Http\Router;
 use Neutrino\Support\Facades\Facade;
 use Neutrino\Test\Helpers\RoutesTrait;
@@ -10,7 +11,7 @@ use Phalcon\Di;
 /**
  * Class RoutesTestCase
  *
- *  @package Neutrino\Test
+ * @package Neutrino\Test
  */
 abstract class RoutesTestCase extends FuncTestCase
 {
@@ -23,8 +24,6 @@ abstract class RoutesTestCase extends FuncTestCase
      */
     public function getApplicationRoutes()
     {
-        global $config;
-
         $di = new Di();
         Di::setDefault($di);
 
@@ -33,7 +32,7 @@ abstract class RoutesTestCase extends FuncTestCase
 
         (new Router())->registering();
 
-        require $config['paths']['routes'] . 'http.php';
+        require Dotenv::env('BASE_PATH') . '/routes/http.php';
 
         $routes = [];
         foreach ($di->getShared('router')->getRoutes() as $route) {
@@ -56,8 +55,14 @@ abstract class RoutesTestCase extends FuncTestCase
      *
      * @return array
      */
-    public function formatDataRoute($route, $method, $expected, $controller = null, $action = null, array $params = null)
-    {
+    public function formatDataRoute(
+        $route,
+        $method,
+        $expected,
+        $controller = null,
+        $action = null,
+        array $params = null
+    ) {
         return [$route, $method, $expected, $controller, $action, $params];
     }
 
@@ -70,7 +75,9 @@ abstract class RoutesTestCase extends FuncTestCase
 
         $_routes = [];
         foreach ($routes as $route) {
-            $key = $route[1] . '-' . $route[0] . '-' . ($route[2] ? 'true' : 'false') . '-' . substr(md5(uniqid('', true)), 0, 6);
+            $key =
+                $route[1] . '-' . $route[0] . '-' . ($route[2] ? 'true' : 'false') . '-' . substr(md5(uniqid('', true)),
+                    0, 6);
 
             $_routes[$key] = $route;
         }
@@ -96,8 +103,7 @@ abstract class RoutesTestCase extends FuncTestCase
         $controller = null,
         $action = null,
         array $params = null
-    )
-    {
+    ) {
         $this->assertRoute($route, $method, $expected, $controller, $action, $params);
     }
 
