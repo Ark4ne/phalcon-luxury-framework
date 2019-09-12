@@ -7,6 +7,7 @@ php:
   - 7.0
   - 7.1
   - 7.2
+  - 7.3
 
 env:
   - PHALCON_VERSION="3.0.x"
@@ -20,6 +21,8 @@ matrix:
   - php: 7.1
     env: PHALCON_VERSION="3.0.x"
   - php: 7.2
+    env: PHALCON_VERSION="3.0.x"
+  - php: 7.3
     env: PHALCON_VERSION="3.0.x"
 
 install:
